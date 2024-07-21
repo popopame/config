@@ -1,0 +1,24 @@
+---
+# tasks file for install-pihole-docker-compose
+
+- name: Create pi-hole folder in {{ pihole_docker_compose_dir }}
+  ansible.builtin.file:
+    path: "{{ pihole_docker_compose_dir }}"
+    state: directory
+    owner: root
+    
+
+- name: Create pi-hole docker-compose file in {{ pihole_docker_compose_dir }}
+  template:
+    src: pi-hole-docker-compose.yaml.j2
+    dest: "{{ pihole_docker_compose_dir }}/pi-hole-docker-compose.yaml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure aliases for shell
+  ansible.builtin.template:
+    src: pihole-shell-aliases.sh.j2
+    dest: "{{ shell_aliases_folder }}/pihole-aliases.sh"
+
+

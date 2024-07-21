@@ -1,0 +1,11 @@
+---
+# tasks file for save-server-config
+
+- name: Update all apt packages
+  apt:
+    update_cache: yes
+  
+- name: Upgrade the OS and packages
+  ansible.builtin.apt:
+    upgrade: full
+
