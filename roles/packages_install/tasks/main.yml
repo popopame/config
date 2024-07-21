@@ -1,0 +1,19 @@
+---
+# tasks file for packages_install
+- name: Install basic packages
+  apt:
+    name: "{{ base_packages }}"
+    state: present
+    update_cache: yes
+    
+- name: Install cli packages
+  apt:
+    name: "{{ cli_packages }}"
+    state: present
+    update_cache: yes 
+
+- name: Install snap packages
+  community.general.snap:
+    name: "{{ item.name }}"
+    classic: "{{ item.classic }}"
+  loop: "{{ snap_packages }}"

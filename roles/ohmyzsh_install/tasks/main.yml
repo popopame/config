@@ -1,0 +1,37 @@
+---
+# tasks file for ohmyzsh_install
+- name: Download Oh My Zsh installation script
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /tmp/install_ohmyzsh.sh
+
+- name: Run Oh My Zsh installation script
+  command: sh /tmp/install_ohmyzsh.sh --unattended
+  register: ohmyzsh_result
+  failed_when: "'FAILED' in ohmyzsh_result.stderr"
+
+- name: Set zsh as default shell
+  become: true
+  ansible.builtin.user:
+    name: '{{ user }}'
+    shell: /bin/zsh
+
+- name: Remove Oh My Zsh installation script
+  file:
+    path: /tmp/install_ohmyzsh.sh
+    state: absent
+
+- name: clone zsh-autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: /home/{{ user }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: Set .zshrc file
+  copy:
+    src: files/.zshrc
+    dest: /home/{{ user }}/.zshrc
+
+- name: Create aliases folder, will be used to store all aliases files
+  file:
+    path: /home/{{ user }}/.aliases
+    state: directory

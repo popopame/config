@@ -1,0 +1,22 @@
+---
+# tasks file for vagrant_install
+- name: Install vagrant packages
+  apt:
+    name: "{{ vagrant_packages }}"
+    state: latest
+    update_cache: true
+
+- name: Add user to libvirt group
+  user:
+    name: "{{ user }}"
+    groups: libvirt
+    append: yes
+    state: present
+
+- name: Add user to kvm group
+  user:
+    name: "{{ user }}"
+    groups: kvm
+    append: yes
+    state: present
+

@@ -1,0 +1,69 @@
+base_packages:
+  - vim
+  - git
+  - xorg
+  - i3
+  - curl
+  - lightdm
+  - lightdm-gtk-greeter
+  - i3-wm
+  - i3lock
+  - i3status
+  - i3blocks
+  - dmenu
+  - xautolock
+  - thunar
+  - gnome-calculator
+  - ca-certificates
+  - pulseaudio
+  - pavucontrol
+  - htop
+  - net-tools
+  - openvpn
+  - network-manager-openvpn
+  - snapd
+  - fzf
+  - pass
+  - gnupg
+  - gpg-agent
+  - keychain
+  - flameshot
+  - vlc
+
+docker_packages:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+  - docker-buildx-plugin
+  - docker-compose-plugin
+  - docker-compose
+  
+cli_packages:
+  - kubectx
+  - terminator
+  - zsh
+  - bat
+  - exa
+  - zoxide
+
+vagrant_packages:
+  - vagrant
+  - vagrant-libvirt
+  - libvirt-daemon-system
+  - libvirt-clients
+  - virt-manager
+  - qemu-kvm
+  - nfs-kernel-server
+  - nfs-common
+
+snap_packages:
+  - name: code
+    classic: true
+  - name: discord
+    classic: true
+  - name: kubectl
+    classic: true
+  - name: chromium
+    classic: true
+
+user: "gabin"  # Replace 'gabin' with your username variable

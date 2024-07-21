@@ -1,0 +1,11 @@
+--- 
+
+- name: Install pihole 
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  roles:
+    - install_pihole_docker_compose
