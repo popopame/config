@@ -1,0 +1,45 @@
+---
+# tasks file for install-pihole-docker-compose
+
+- name: Create pi-hole folder in {{ pihole_docker_compose_dir }}
+  ansible.builtin.file:
+    path: "{{ pihole_docker_compose_dir }}"
+    state: directory
+    owner: root
+    
+
+- name: Create pi-hole docker-compose file in {{ pihole_docker_compose_dir }}
+  template:
+    src: pi-hole-docker-compose.yaml.j2
+    dest: "{{ pihole_docker_compose_dir }}/pi-hole-docker-compose.yaml"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure aliases for shell
+  ansible.builtin.template:
+    src: pihole-shell-aliases.sh.j2
+#    dest: "{{ shell_aliases_folder }}/pihole-aliases.sh"
+    dest: /home/gabin/.aliases/pihole-aliases.sh
+
+- name: Update /etc/resolv.conf
+  block:
+    - name: Backup /etc/resolv.conf before making changes
+      copy:
+        src: /etc/resolv.conf
+        dest: /etc/resolv.conf.bak
+        remote_src: yes
+
+    - name: Comment all existing lines in /etc/resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        state: present
+        regexp: '^(?!#).*'
+        line: '# \g<0>'
+        backrefs: yes
+
+    - name: Add nameserver 127.0.0.1 to /etc/resolv.conf
+      lineinfile:
+        path: /etc/resolv.conf
+        state: present
+        line: 'nameserver 127.0.0.1'

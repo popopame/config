@@ -1,0 +1,15 @@
+
+#Start pihole docker compose 
+alias pihole-start="docker compose -f {{ pihole_docker_compose_dir }}/pi-hole-docker-compose.yaml up -d"
+
+#Block
+alias pihole-block="docker exec {{ pihole_container_name }} pihole --wild youtube.com googlevideo.com 9gag.com 9cache.com reddit.com"
+
+#UnBlock
+alias pihole-unblock="docker exec {{ pihole_container_name }} pihole  --white-regex youtube.com googlevideo.com 9gag.com 9cache.com reddit.com"
+
+#Disable {{ pihole_container_name }} for a set period of time (defined in minutes, like 20m)
+alias pihole-disable="docker exec pihole pihole disable" 
+
+#enable pihole 
+alias pihole-enable="docker exec {{ pihole_container_name }} pihole enable"
