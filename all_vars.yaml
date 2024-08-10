@@ -14,6 +14,7 @@ base_packages:
   - xautolock
   - thunar
   - gnome-calculator
+  - gnome-control-center
   - ca-certificates
   - pulseaudio
   - pavucontrol
@@ -67,3 +68,5 @@ snap_packages:
     classic: true
 
 user: "gabin"  # Replace 'gabin' with your username variable
+
+shell_aliases_folder: "/home/{{ user }}/.aliases"

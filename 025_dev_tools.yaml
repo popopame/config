@@ -1,0 +1,19 @@
+- name: Install docker
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  roles:
+    - docker_install
+
+- name: Install vagrant
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  roles:
+    - vagrant_install

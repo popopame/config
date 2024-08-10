@@ -1,0 +1,26 @@
+- name: Set i3 config
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  tasks:
+    - name: Create i3 config directory
+      file:
+        state: directory
+        path: /home/{{ user }}/.config/i3
+    - name: Set i3 config file
+      copy:
+        src: files/config
+        dest: /home/{{ user }}/.config/i3/config
+
+- name: Install oh-my-zsh
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  roles:
+    - ohmyzsh_install

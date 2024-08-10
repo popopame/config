@@ -1,0 +1,23 @@
+---
+- name: Copy shell aliases
+  hosts: localhost
+  vars_files:
+    - all_vars.yaml
+  tasks:
+    - name: Create aliases folder if it does not exist
+      ansible.builtin.file:
+        path: "{{ shell_aliases_folder }}"
+        state: directory
+        owner: "{{ user }}"
+
+    - name: Get list of all files
+      find:
+        paths: ./files/shell_aliases
+      register: all_files
+
+    - name: Copy file in shell aliases folder
+      template:
+        src: "{{ item.path }}"
+        dest: "{{ shell_aliases_folder }}/{{ item.path | basename }}"
+        owner: "{{ user }}"
+      loop: "{{ all_files.files }}"

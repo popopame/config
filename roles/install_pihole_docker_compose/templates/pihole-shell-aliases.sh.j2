@@ -3,7 +3,7 @@
 alias pihole-start="docker compose -f {{ pihole_docker_compose_dir }}/pi-hole-docker-compose.yaml up -d"
 
 #Block
-alias pihole-block="docker exec {{ pihole_container_name }} pihole --wild youtube.com googlevideo.com 9gag.com 9cache.com reddit.com"
+alias pihole-block="docker exec {{ pihole_container_name }} pihole --wild youtube.com googlevideo.com 9gag.com 9cache.com reddit.com 4chan.org instagram.com linkedin.com"
 
 #UnBlock
 alias pihole-unblock="docker exec {{ pihole_container_name }} pihole  --white-regex youtube.com googlevideo.com 9gag.com 9cache.com reddit.com"

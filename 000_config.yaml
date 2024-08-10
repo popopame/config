@@ -1,53 +1,11 @@
 ---
-- name: Installation des packages apt et snap
-  hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  vars_files:
-    - all_vars.yaml
-  roles:
-    - packages_install
 
-- name: Set i3 config
-  hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  vars_files:
-    - all_vars.yaml
-  tasks:
-    - name: Set i3 config file
-      copy:
-        src: files/config
-        dest: /home/{{ user }}/.config/i3/config
+- import_playbook: 010_packages_install.yaml
 
-- name: Install oh-my-zsh
-  hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  vars_files:
-    - all_vars.yaml
-  roles:
-    - ohmyzsh_install
+- import_playbook: 020_cli_config.yaml
 
-- name: Install docker
-  hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  vars_files:
-    - all_vars.yaml
-  roles:
-    - docker_install
+- import_playbook: 025_dev_tools.yaml
 
-- name: Install vagrant
-  hosts: localhost
-  become: yes
-  become_user: root
-  become_method: sudo
-  vars_files:
-    - all_vars.yaml
-  roles:
-    - vagrant_install
+- import_playbook: 080_pihole.yaml
+
+- import_playbook: 085_aliases.yaml

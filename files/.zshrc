@@ -1,10 +1,12 @@
-export ZSH="/home/gabin/.oh-my-zsh"
+# Path to your Oh My Zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
 
-plugins=(git zsh-autosuggestions z sudo kube-ps1 kubectl kubetail)
+plugins=(git zsh-autosuggestions z sudo kube-ps1 kubectl)
 
 source $ZSH/oh-my-zsh.sh
 

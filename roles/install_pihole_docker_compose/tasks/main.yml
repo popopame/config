@@ -19,8 +19,7 @@
 - name: Configure aliases for shell
   ansible.builtin.template:
     src: pihole-shell-aliases.sh.j2
-#    dest: "{{ shell_aliases_folder }}/pihole-aliases.sh"
-    dest: /home/gabin/.aliases/pihole-aliases.sh
+    dest: "{{ shell_aliases_folder }}/pihole-aliases.sh"
 
 - name: Update /etc/resolv.conf
   block:

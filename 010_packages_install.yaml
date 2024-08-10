@@ -1,0 +1,10 @@
+---
+- name: Installation des packages apt et snap
+  hosts: localhost
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars_files:
+    - all_vars.yaml
+  roles:
+    - packages_install
